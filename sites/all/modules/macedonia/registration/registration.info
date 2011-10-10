@@ -1,0 +1,12 @@
+name = Registration
+description = Macedonia guests registration.
+package = Macedonia
+core = 7.x
+files[] = registration.test
+
+; Information added by drupal.org packaging script on 2011-10-02
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "macedonia"
+datestamp = "1317514926"
+

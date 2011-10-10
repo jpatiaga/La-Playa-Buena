@@ -1,0 +1,90 @@
+? translation_management-node-hooks-by-value.patch.txt
+Index: icl_content/icl_content.wrapper.inc
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/translation_management/icl_content/icl_content.wrapper.inc,v
+retrieving revision 1.3
+diff -u -r1.3 icl_content.wrapper.inc
+--- icl_content/icl_content.wrapper.inc	14 Sep 2010 09:06:42 -0000	1.3
++++ icl_content/icl_content.wrapper.inc	29 Dec 2010 22:05:30 -0000
+@@ -27,21 +27,21 @@
+ /**
+  * Implements hook_node_insert().
+  */
+-function icl_content_node_insert(&$node) {
++function icl_content_node_insert($node) {
+   icl_content_nodeapi($node, 'insert');
+ }
+ 
+ /**
+  * Implements hook_node_update().
+  */
+-function icl_content_node_update(&$node) {
++function icl_content_node_update($node) {
+   icl_content_nodeapi($node, 'update');
+ }
+ 
+ /**
+  * Implements hook_node_delete().
+  */
+-function icl_content_node_delete(&$node) {
++function icl_content_node_delete($node) {
+   icl_content_nodeapi($node, 'delete');
+ }
+ 
+@@ -57,48 +57,48 @@
+ /**
+  * Implements hook_node_prepare().
+  */
+-function icl_content_node_prepare(&$node) {
++function icl_content_node_prepare($node) {
+   icl_content_nodeapi($node, 'prepare');
+ }
+ 
+ /**
+  * Implements hook_node_prepare_translation().
+  */
+-function icl_content_node_prepare_translation(&$node) {
++function icl_content_node_prepare_translation($node) {
+   icl_content_nodeapi($node, 'prepare_translation');
+ }
+ 
+ /**
+  * Implements hook_node_search_result().
+  */
+-function icl_content_node_search_result(&$node) {
++function icl_content_node_search_result($node) {
+   icl_content_nodeapi($node, 'search_result');
+ }
+ 
+ /**
+  * Implements hook_node_presave().
+  */
+-function icl_content_node_presave(&$node) {
++function icl_content_node_presave($node) {
+   icl_content_nodeapi($node, 'presave');
+ }
+ 
+ /**
+  * Implements hook_node_update_index().
+  */
+-function icl_content_node_update_index(&$node) {
++function icl_content_node_update_index($node) {
+   icl_content_nodeapi($node, 'update_index');
+ }
+ 
+ /**
+  * Implements hook_node_validate().
+  */
+-function icl_content_node_validate(&$node) {
++function icl_content_node_validate($node) {
+   icl_content_nodeapi($node, 'validate');
+ }
+ 
+ /**
+  * Implements hook_node_view().
+  */
+-function icl_content_node_view(&$node) {
++function icl_content_node_view($node) {
+   icl_content_nodeapi($node, 'view');
+ }
+\ No newline at end of file

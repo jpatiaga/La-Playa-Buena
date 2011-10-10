@@ -1,0 +1,14 @@
+; $Id: icl_core.info,v 1.7 2010/09/03 14:40:55 jozik Exp $
+name = Core
+description = Provides core services for sending and returning translation jobs.
+package = Translation Management
+core = 7.x
+dependencies[] = translation
+files[] = icl_core.install
+files[] = icl_core.module
+; Information added by drupal.org packaging script on 2010-12-29
+version = "7.x-1.0-beta1"
+core = "7.x"
+project = "translation_management"
+datestamp = "1293593580"
+

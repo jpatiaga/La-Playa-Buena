@@ -1,0 +1,14 @@
+name = Content
+description = Allows various content types to be sent for translation via the translation dashboard.
+dependencies[] = icl_core
+dependencies[] = icl_translate
+core = 7.x
+package = Translation Management
+files[] = icl_content.install
+files[] = icl_content.module
+; Information added by drupal.org packaging script on 2010-12-29
+version = "7.x-1.0-beta1"
+core = "7.x"
+project = "translation_management"
+datestamp = "1293593580"
+

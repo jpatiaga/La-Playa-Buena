@@ -1,0 +1,15 @@
+name = Local translation service
+description = Localization of content using local translators.
+dependencies[] = icl_core
+dependencies[] = icl_content
+dependencies[] = icl_translate
+core = 7.x
+package = Translation Services
+files[] = local_translations.install
+files[] = local_translations.module
+; Information added by drupal.org packaging script on 2010-12-29
+version = "7.x-1.0-beta1"
+core = "7.x"
+project = "translation_management"
+datestamp = "1293593580"
+

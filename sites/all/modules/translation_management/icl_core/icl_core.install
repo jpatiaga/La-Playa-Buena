@@ -1,0 +1,136 @@
+<?php
+
+/*
+ * $Id: icl_core.install
+ * 
+ * @file Installation and uninstallation functions
+ */
+
+include_once dirname(__FILE__) . '/icl_core.module';
+
+/**
+ * The ICL Core schema definition
+ *
+ * @return array
+ */
+function icl_core_schema() {
+  $schema ['icl_core_status'] = array (
+      'description' => 'The ICanLocalize core API statuses',
+      'fields' => array (
+          'rid' => array (
+              'description' => 'The request ID',
+              'type' => 'int', 
+              'unsigned' => TRUE, 
+              'not null' => FALSE ), 
+          'module' => array (
+              'description' => 'The module which requested the translation',
+              'type' => 'varchar', 
+              'length' => 255, 
+              'not null' => TRUE ), 
+          'origin' => array (
+              'description' => 'Th origin language of the requested translation',
+              'type' => 'varchar', 
+              'length' => 12, 
+              'not null' => TRUE ), 
+          'target' => array (
+              'description' => 'The target language of the requested translation',
+              'type' => 'varchar', 
+              'length' => 12, 
+              'not null' => TRUE ), 
+          'status' => array (
+              'description' => 'The status of the request',
+              'type' => 'int', 
+              'unsigned' => TRUE, 
+              'not null' => TRUE, 
+              'length' => 1 ), 
+          'translation_service' => array(
+              'description' => 'indicates if translation is done locally or another translation service',
+              'type' => 'varchar', 
+              'length' => 32, 
+              'default' => 'ICL',   
+              'not null' => TRUE ), 
+          'service_rid' => array(
+              'description' => 'stores the request id from the translation service',
+              'type' => 'varchar', 
+              'length' => 32, 
+              'default' => 'ICL',   
+              'not null' => TRUE ), 
+          ) );
+  
+
+  $schema ['icl_languages'] = array (
+      'description' => 'The ICanLocalize languages and their mapping to Drupal languages',
+      'fields' => array (
+          'code' => array (
+              'description' => 'Drupal language code',
+              'type' => 'varchar',
+              'length' => 12,
+              'not null' => TRUE,
+              'default' => ''),
+          'icl_name' => array (
+              'description' => 'The ICanLocalize language name',
+              'type' => 'varchar', 
+              'length' => 255, 
+              'not null' => TRUE ), 
+          'icl_id' => array (
+              'description' => 'The ICanLocalize language id',
+              'type' => 'int', 
+              'not null' => TRUE ), 
+           ) );
+
+    $schema ['icl_reminders'] = array (
+        'description' => 'The reminders from ICanLocalize',
+        'fields' => array (
+            'id' => array (
+                'description' => 'ICanLocalize id',
+                'type' => 'int',
+                'not null' => TRUE,
+                'lenght' => 1),
+            'message' => array (
+                'description' => 'ICanLocalize reminder text',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'url' => array (
+                'description' => 'url on ICanLocalize',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'can_delete' => array (
+                'description' => 'indicate if the reminder can be deleted',
+                'type' => 'int',
+                'not null' => TRUE,
+                'lenght' => 1),
+            'show' => array (
+                'description' => 'indicate if the reminder should be shown',
+                'type' => 'int',
+                'not null' => TRUE,
+                'lenght' => 1),
+                
+            ) );
+    
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install()
+ * @see http://api.drupal.org/api/function/hook_install/6
+ *
+ */
+function icl_core_install() {
+  // set all the languages defined.
+  icl_core_initialize_languages();
+}
+
+
+/**
+ * Implementation of hook_uninstall()
+ * @see http://api.drupal.org/api/function/hook_uninstall/6
+ *
+ */
+function icl_core_uninstall() {
+  variable_del ( 'icl_core_languages' );
+  variable_del ( 'icl_core_website_id' );
+  variable_del ( 'icl_core_accesskey' );
+  variable_del ( 'icl_core_receive_options' );
+}

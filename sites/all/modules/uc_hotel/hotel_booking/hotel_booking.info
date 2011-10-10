@@ -1,0 +1,17 @@
+; $Id: hotel_booking.info,v 1.2.2.2 2010/12/02 03:48:05 larowlan Exp $
+name = Hotel Booking
+description = "Allows for a simple hotel booking system"
+package = Ubercart - hotel
+core = "7.x"
+dependencies[] = uc_cart
+dependencies[] = date_api
+dependencies[] = uc_payment
+dependencies[] = rules
+dependencies[] = date_popup
+files[] = hotel_booking.test
+; Information added by drupal.org packaging script on 2010-12-10
+version = "7.x-1.0-alpha1"
+core = "7.x"
+project = "uc_hotel"
+datestamp = "1291963598"
+
