@@ -434,7 +434,7 @@ function registration_process_8($form, &$form_state) {
 	);
   $form['guests'] = array(
 		'#type' => 'select',
-		'#title' => t('Guests/room'),
+		'#title' => t('Guests'),
 		'#default_value' => 1,
 		'#options' => array(
 			1 => '1',

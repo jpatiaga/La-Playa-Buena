@@ -3,9 +3,11 @@ description = Macedonia, San Clemente
 package = Core
 version = VERSION
 core = 7.x
+stylesheets[all][] = css/redmond/jquery-ui-1.8.16.custom.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/global.css
 
+scripts[] = js/jquery-ui-1.8.16.custom.min.js
 scripts[] = js/jquery.cycle.all.js
 scripts[] = js/global.js
 
