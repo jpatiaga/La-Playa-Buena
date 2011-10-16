@@ -402,16 +402,14 @@ function registration_process_8($form, &$form_state) {
 
   $form['description'] = array(
     '#type' => 'item',
-//    '#title' => t('A basic multistep form (page 1)'),
   );
-
   $form['check_in'] = array(
 	  '#type' => 'textfield',
 	  '#title' => t('Check-in date'),
 	  '#size' => 10,
 	  '#maxlength' => 10,
 	  '#required' => TRUE,
-	  '#default_value' => date('Y/m/d'),
+	  '#default_value' => isset($form_state['values']['check_in']) ? $form_state['values']['check_in'] : date('m/d/Y'),
   );
   $form['check_out'] = array(
 	  '#type' => 'textfield',
@@ -419,12 +417,13 @@ function registration_process_8($form, &$form_state) {
 	  '#size' => 10,
 	  '#maxlength' => 10,
 	  '#required' => TRUE,
-	  '#default_value' => date('Y/m/d', time() + 24 * 60 * 60),
+	  '#default_value' => isset($form_state['values']['check_out']) ? $form_state['values']['check_out'] : date('m/d/Y', time() + 24 * 60 * 60),
   );
+  $roomsVal = isset($form_state['values']['rooms']) ? $form_state['values']['rooms'] : 1;
   $form['rooms'] = array(
 		'#type' => 'select',
 		'#title' => t('Rooms'),
-		'#default_value' => 1,
+		'#default_value' => $roomsVal,
 		'#options' => array(
 			1 => '1',
 			2 => '2',
@@ -432,41 +431,24 @@ function registration_process_8($form, &$form_state) {
 			4 => '4',
 		),
 	);
+  $guestsVal = isset($form_state['values']['guests']) ? $form_state['values']['guests'] : $roomsVal;
+  $guestsOpt = array();
+//  for ($i = $roomsVal; $i <= 4 * $roomsVal; $i++) {
+//	  $guestsOpt[$i] = $i;
+//  }
+  for ($i = 1; $i <= 16; $i++) {
+	  $guestsOpt[$i] = $i;
+  }
   $form['guests'] = array(
 		'#type' => 'select',
 		'#title' => t('Guests'),
-		'#default_value' => 1,
-		'#options' => array(
-			1 => '1',
-			2 => '2',
-			3 => '3',
-			4 => '4',
-		),
+		'#default_value' => $guestsVal,
+		'#options' => $guestsOpt,
 	);
 
-//  $form['first'] = array(
-//    '#type' => 'textfield',
-//    '#title' => t('First name'),
-//    '#description' => "Please enter your first name.",
-//    '#size' => 20,
-//    '#maxlength' => 20,
-//    '#required' => TRUE,
-//    '#default_value' => !empty($form_state['values']['first']) ? $form_state['values']['first'] : '',
-//  );
-//  $form['last'] = array(
-//    '#type' => 'textfield',
-//    '#title' => t('Last name'),
-//    '#default_value' => !empty($form_state['values']['last']) ? $form_state['values']['last'] : '',
-//  );
-//  $form['year_of_birth'] = array(
-//    '#type' => 'textfield',
-//    '#title' => "Year of birth",
-//    '#description' => 'Format is "YYYY"',
-//    '#default_value' => !empty($form_state['values']['year_of_birth']) ? $form_state['values']['year_of_birth'] : '',
-//  );
   $form['next'] = array(
     '#type' => 'submit',
-    '#value' => 'Next >>',
+    '#value' => t('Next >>'),
     '#submit' => array('registration_process_8_next_submit'),
     '#validate' => array('registration_process_8_next_validate'),
   );
@@ -477,9 +459,17 @@ function registration_process_8($form, &$form_state) {
  * Returns the form for the second page of registration_process_8().
  */
 function registration_process_8_page_two($form, &$form_state) {
+	global $language;
 	$form['description'] = array(
 		'#type' => 'item',
 		'#title' => t('Please enter your contact information to complete the reservation'),
+	);
+	$form['dates_display'] = array(
+		'#type' => 'item',
+		'#prefix' => '<div class="reservation-info">',
+		'#markup' => $form_state['input']['check_in'] . ($language->language == 'es' ? ' a ' : ' to ') . $form_state['input']['check_out'] . '<br />' .
+			$form_state['input']['rooms'] . ($language->language == 'es' ? ' ' . ($form_state['input']['rooms'] == 1 ? 'habitación' : 'habitaciones') . ', ' : ' room' . ($form_state['input']['rooms'] == 1 ? '' : 's') . ', ') . $form_state['input']['guests'] . ($language->language == 'es' ? ' huésped' . ($form_state['input']['guests'] == 1 ? '' : 'es') : ' guest'. ($form_state['input']['guests'] == 1 ? '' : 's')),
+		'#suffix' => '</div>',
 	);
 	$form['name'] = array(
 		'#type' => 'textfield',
@@ -497,19 +487,19 @@ function registration_process_8_page_two($form, &$form_state) {
 		'#required' => TRUE,
 	);
   
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-    '#submit' => array('registration_process_8_page_two_submit'),
-	'#validate' => array('registration_process_8_page_two_next_validate'),
-  );
   $form['back'] = array(
     '#type' => 'submit',
-    '#value' => t('<< Back'),
+    '#value' => t('Modify reservation'),
     '#submit' => array('registration_process_8_page_two_back'),
     // We won't bother validating the required 'color' field, since they
     // have to come back to this page to submit anyway.
     '#limit_validation_errors' => array(),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Reserve now!'),
+    '#submit' => array('registration_process_8_page_two_submit'),
+	'#validate' => array('registration_process_8_page_two_next_validate'),
   );
   return $form;
 }
@@ -524,6 +514,9 @@ function registration_process_8_next_validate($form, &$form_state) {
 	}
 	if (!strtotime($form_state['values']['check_out'])) {
 		form_set_error('check_out', t('Invalid date'));
+	}
+	if (strtotime($form_state['values']['check_out']) < strtotime($form_state['values']['check_in'])) {
+		form_set_error('check_out', t('Check in date cannot be after the checkout date'));
 	}
 }
 

@@ -6,6 +6,8 @@ core = 7.x
 stylesheets[all][] = css/redmond/jquery-ui-1.8.16.custom.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/global.css
+stylesheets-conditional[lte IE 7][all][] = css/ie7.css
+stylesheets-conditional[IE 8][all][] = css/ie8.css
 
 scripts[] = js/jquery-ui-1.8.16.custom.min.js
 scripts[] = js/jquery.cycle.all.js
