@@ -1,0 +1,14 @@
+#header #block-block-1 {
+/*	behavior: url('/sites/all/themes/macedonia/css/border-radius.htc');*/
+}
+
+.pane-menu-menu-tabs ul.menu li a,
+#header #block-block-1 {
+	background-color: transparent;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff, endColorstr=#7fffffff)";
+}
+
+.pane-menu-menu-tabs ul.menu li a:hover {
+	background-color: transparent;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F3B99D2, endColorstr=#7F3B99D2)";
+}
