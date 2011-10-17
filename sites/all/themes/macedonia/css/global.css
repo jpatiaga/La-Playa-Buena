@@ -239,3 +239,24 @@ body.front h1#page-title {
 	font-size: 11px;
 	color: #262626;
 }
+
+/* NEWS TEASERS */
+.view-home li.views-row {
+	margin: 20px 0 0;
+	padding: 20px;
+	background: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+}
+.view-home li.views-row h2 {
+	margin-top: 0;
+}
+.view-home li.views-row .submitted {
+	display: none;
+}
+.view-home li.views-row p a img {
+	padding: 0 20px 20px 0;
+}
+.view-home li.views-row > p > a {
+	float: left;
+}
