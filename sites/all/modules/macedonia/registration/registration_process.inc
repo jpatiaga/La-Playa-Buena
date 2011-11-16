@@ -570,20 +570,39 @@ function registration_process_8_page_two_back($form, &$form_state) {
  * it in a drupal_set_message().
  */
 function registration_process_8_page_two_submit($form, &$form_state) {
+  global $language;
   // Normally, some code would go here to alter the database with the data
   // collected from the form. Instead sets a message with drupal_set_message()
   // to validate that the code worked.
   $page_one_values = $form_state['page_values'][1];
-  drupal_set_message(t('The form has been submitted. name="@first @last", year of birth=@year_of_birth',
-  array('@first' => $page_one_values['check_in'], '@last' => $page_one_values['check_out'], '@year_of_birth' => $page_one_values['guests'])));
+//  drupal_set_message(t('The form has been submitted. name="@first @last", year of birth=@year_of_birth',
+//  array('@first' => $page_one_values['check_in'], '@last' => $page_one_values['check_out'], '@year_of_birth' => $page_one_values['guests'])));
 
 //  if (!empty($page_one_values['first2'])) {
 //    drupal_set_message(t('Second name: name="@first @last", year of birth=@year_of_birth',
 //    array('@first' => $page_one_values['first2'], '@last' => $page_one_values['last2'], '@year_of_birth' => $page_one_values['year_of_birth2'])));
 //  }
-  drupal_set_message(t('And the favorite color is @color', array('@color' => $form_state['values']['email'])));
+//  drupal_set_message(t('And the favorite color is @color', array('@color' => $form_state['values']['email'])));
 
-  drupal_mail('registration', 'reservation', 'jpatiaga@gmail.com', $language);
+  $screen_message = $language->language == 'es' ? 'Gracias por su reserva. Nos contactaremos con usted en las próximas 48 horas' :
+		  'Thank you for your reservation. We will contact you in the next 48 hours.';
+  drupal_set_message($screen_message);
+
+  $site_email = variable_get('site_mail', 'info@laplayabuena.com');
+  $message = "Han hecho una reservacion en Macedonia:\n\n
+Fecha: " . date('l, F j, Y') . " " . date('d/m/Y') . "\n
+Nombre: " . $form_state['values']['name'] . "\n
+Email: " . $form_state['values']['email'] . "\n
+Telf: " . $form_state['values']['phone'] . "\n\n
+No. huespedes: " . $form_state['values']['guests'] . "\n
+Habitaciones: " . $form_state['values']['rooms'] . "\n\n
+Desde: " . $form_state['values']['check_in'] . "\n
+Hasta: " . $form_state['values']['check_out'] . "\n\n
+Por favor comunicarse en las proximas 48 horas\n\n
+";
+  mail($site_email, 'Reservacion Macedonia', $message);
+
+//  drupal_mail('registration', 'reservation', 'info@laplayabuena.com', $language);
 
   // If we wanted to redirect on submission, set $form_state['redirect']
   // $form_state['redirect'] = 'node'; // Redirects the user to /node.
@@ -597,7 +616,7 @@ function registration_mail($key, &$message, $params) {
 		case 'reservation':
 //			$langcode = $message['language']->language;
 			$message['subject'] = t('Notification from Macedonia');
-			$message['body'][] = t("Han hecho una reservacion.");
+			$message['body'][] = t("Han hecho una reservacion." . var_export($params,true));
 			break;
 	}
 }
