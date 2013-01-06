@@ -50,6 +50,8 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400' rel='stylesheet' type='text/css'></link>
+  <link rel="image_src" href="http://laplayabuena.com/sites/default/files/styles/homepage_slideshow/public/slideshow_images/DSC02683.JPG"></link>
+  <meta name="description" content="Departamentos y suites de renta en San Clemente, Ecuador. Telf: 099942752" />
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div id="skip-link">

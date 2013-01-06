@@ -72,7 +72,7 @@ body.front h1#page-title {
 	margin: 0 55px 0 0;
 	padding-top: 10px;
 }
-#header .block-locale .language-switcher-locale-url {
+#header .block-locale ul {
 	margin: 1px 0 0;
 	padding: 0;
 }
@@ -110,7 +110,7 @@ body.front h1#page-title {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	background-color: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.5);
 }
 #header #block-block-1 p {
 	margin: 0;
@@ -159,7 +159,7 @@ body.front h1#page-title {
 	width: 90px;
 	text-transform: lowercase;
 	background: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.5);
 	font-family: 'Open Sans', sans-serif;
 	display: block;
 }
@@ -169,7 +169,7 @@ body.front h1#page-title {
 .pane-menu-menu-tabs ul.menu li a:hover,
 .pane-menu-menu-tabs-es ul.menu li a:hover {
 	background-color: rgb(59, 153, 210);
-	background-color: rgba(59, 153, 210, 0.8);
+	background-color: rgba(59, 153, 210, 0.5);
 	text-decoration: none;
 }
 .tabs-slideshow	{
@@ -261,15 +261,12 @@ body.front h1#page-title {
 	margin: 20px 0 0;
 	padding: 20px;
 	background: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 10px;
 	overflow: hidden;
 }
 .view-home li.views-row h2 {
 	margin-top: 0;
-}
-.view-home li.views-row h2 a {
-	color: #333399;
 }
 .view-home li.views-row .submitted {
 	display: none;
@@ -287,7 +284,7 @@ body.front h1#page-title {
 	color: #333399;
 	padding: 10px;
 	background: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 240, 0.8);
 	border-radius: 10px;
 	margin: 20px 0 10px;
 }
@@ -299,7 +296,7 @@ body.front h1#page-title {
 	margin: 0;
 	padding: 20px;
 	background: rgb(255, 255, 255);
-	background-color: rgba(255, 255, 240, 0.8);
+	background-color: rgba(255, 255, 240, 0.5);
 	border-radius: 10px;
 	overflow: hidden;
 }
@@ -307,6 +304,13 @@ body.front h1#page-title {
 	float: left;
 	padding: 0 20px 20px 0;
 }
+.not-front.node-type-page #content .region-content .field-type-image {
+	float: right;
+	padding: 0 0 20px 20px;
+}
 .not-front #content .region-content ul li {
 	list-style: disc outside none;
+}
+.not-front.node-type-page .field-name-body {
+	float: left;
 }

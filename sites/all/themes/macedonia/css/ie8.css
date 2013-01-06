@@ -3,17 +3,12 @@
 }
 
 .pane-menu-menu-tabs ul.menu li a,
-.pane-menu-menu-tabs-es ul.menu li a,
-#header #block-block-1,
-.not-front #content .region-content,
-.not-front #content h1,
-.view-home li.views-row {
+#header #block-block-1 {
 	background-color: transparent;
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff, endColorstr=#7fffffff)";
 }
 
-.pane-menu-menu-tabs ul.menu li a:hover,
-.pane-menu-menu-tabs-es ul.menu li a:hover {
+.pane-menu-menu-tabs ul.menu li a:hover {
 	background-color: transparent;
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F3B99D2, endColorstr=#7F3B99D2)";
 }

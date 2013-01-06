@@ -594,13 +594,13 @@ Fecha: " . date('l, F j, Y') . " " . date('d/m/Y') . "\n
 Nombre: " . $form_state['values']['name'] . "\n
 Email: " . $form_state['values']['email'] . "\n
 Telf: " . $form_state['values']['phone'] . "\n\n
-No. huespedes: " . $form_state['values']['guests'] . "\n
-Habitaciones: " . $form_state['values']['rooms'] . "\n\n
-Desde: " . $form_state['values']['check_in'] . "\n
-Hasta: " . $form_state['values']['check_out'] . "\n\n
+No. huespedes: " . $page_one_values['guests'] . "\n
+Habitaciones: " . $page_one_values['rooms'] . "\n\n
+Desde: " . $page_one_values['check_in'] . "\n
+Hasta: " . $page_one_values['check_out'] . "\n\n
 Por favor comunicarse en las proximas 48 horas\n\n
 ";
-  mail($site_email, 'Reservacion Macedonia', $message);
+  mail($site_email, 'Reservacion Macedonia - ' . $form_state['values']['name'], $message);
 
 //  drupal_mail('registration', 'reservation', 'info@laplayabuena.com', $language);
 
